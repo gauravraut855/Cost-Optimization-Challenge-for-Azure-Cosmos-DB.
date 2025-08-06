@@ -101,6 +101,7 @@ from dateutil.parser import parse
 from datetime import datetime, timedelta
 import json
 
+#  STEP 1: CHANGE THESE VARIABLES FOR YOUR ENVIRONMENT
 COSMOS_ENDPOINT = "https://<your-cosmos-account>.documents.azure.com:443/"
 COSMOS_KEY = "<your-cosmos-key>"
 DATABASE_NAME = "BillingDB"
@@ -109,6 +110,7 @@ CONTAINER_NAME = "BillingRecords"
 BLOB_CONNECTION_STRING = "<your-blob-storage-connection-string>"
 BLOB_CONTAINER_NAME = "billing-archive"
 
+#  STEP 2: SET UP CLIENTS
 cosmos_client = CosmosClient(COSMOS_ENDPOINT, COSMOS_KEY)
 database = cosmos_client.get_database_client(DATABASE_NAME)
 container = database.get_container_client(CONTAINER_NAME)
@@ -116,8 +118,10 @@ container = database.get_container_client(CONTAINER_NAME)
 blob_service = BlobServiceClient.from_connection_string(BLOB_CONNECTION_STRING)
 blob_container = blob_service.get_container_client(BLOB_CONTAINER_NAME)
 
+#  STEP 3: DEFINE ARCHIVAL DATE (3 months ago)
 cutoff_date = datetime.utcnow() - timedelta(days=90)
 
+#  STEP 4: ARCHIVE FUNCTION
 def archive_old_records():
     print("Starting archival process...")
     query = "SELECT * FROM c WHERE c.timestamp < @cutoff"
@@ -141,9 +145,23 @@ def archive_old_records():
         except Exception as e:
             print(f"Error archiving {record_id}: {e}")
 ```
+###In Above Script
+  Where to Change:         Line                      What to Update
+  -----------------        ----------------------    ---------------------------------------------
+  COSMOS_ENDPOINT          Paste Cosmos DB URI       e.g., https://<your-account>.documents.azure.com:443/
+  COSMOS_KEY               Paste Cosmos DB Key       (Primary Key from portal)
+  DATABASE_NAME            As created in portal      e.g., BillingDB
+  CONTAINER_NAME           As created in portal      e.g., BillingRecords
+  BLOB_CONNECTION_STRING   Paste Blob conn string    (From Azure Storage account > Access keys)
+  BLOB_CONTAINER_NAME      Name of blob container    e.g., billing-archive
+
 
 ### Run the Script
-
+Where to Run This Script Option 1: Run Locally (Recommended for now) Save the script as archive_old_records.py Open Command Prompt or VS Code terminal.
+Run:
+bash
+Copy
+Edit
 ```bash
 python archive_old_records.py
 ```

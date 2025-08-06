@@ -145,15 +145,18 @@ def archive_old_records():
         except Exception as e:
             print(f"Error archiving {record_id}: {e}")
 ```
+
+
 ###In Above Script
-  Where to Change:         Line                      What to Update
-  -----------------        ----------------------    ---------------------------------------------
-  COSMOS_ENDPOINT          Paste Cosmos DB URI       e.g., https://<your-account>.documents.azure.com:443/
-  COSMOS_KEY               Paste Cosmos DB Key       (Primary Key from portal)
-  DATABASE_NAME            As created in portal      e.g., BillingDB
-  CONTAINER_NAME           As created in portal      e.g., BillingRecords
-  BLOB_CONNECTION_STRING   Paste Blob conn string    (From Azure Storage account > Access keys)
-  BLOB_CONTAINER_NAME      Name of blob container    e.g., billing-archive
+| Where to Change         | Line                      | What to Update                                             |
+|-------------------------|---------------------------|-------------------------------------------------------------|
+| `COSMOS_ENDPOINT`       | Paste Cosmos DB URI       | e.g., `https://<your-account>.documents.azure.com:443/`    |
+| `COSMOS_KEY`            | Paste Cosmos DB Key       | Primary Key from Azure portal                              |
+| `DATABASE_NAME`         | As created in portal      | e.g., `BillingDB`                                           |
+| `CONTAINER_NAME`        | As created in portal      | e.g., `BillingRecords`                                     |
+| `BLOB_CONNECTION_STRING`| Paste Blob conn string    | From Azure Storage > Access keys                           |
+| `BLOB_CONTAINER_NAME`   | Name of blob container    | e.g., `billing-archive`                                    |
+
 
 
 ### Run the Script

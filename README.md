@@ -1,6 +1,6 @@
 ## Requirement
 
-You have a serverless application using Azure Cosmos DB to store billing records in JSON format. You have over 2 million JSON records, some as large as 300 KB each. Records older than 3 months are rarely accessed but must still be available on demand, ideally within a few seconds. Storage cost is growing rapidly in Cosmos DB.
+You have a serverless application using Azure Cosmos DB to store billing records. You have over 2 million records, some as large as 300 KB each. Records older than 3 months are rarely accessed but must still be available on demand, ideally within a few seconds. Storage cost is growing rapidly in Cosmos DB.
 
 You want to:
 
